@@ -92,6 +92,11 @@ void EffectShockWave::updateShockWave(float dt)
                 }
             }
         }
+        else
+        {
+            this->speed = speedTemp;
+            this->shockParam = shockParamTemp;
+        }
     }
 }
 

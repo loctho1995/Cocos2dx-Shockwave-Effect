@@ -44,17 +44,16 @@ bool MainScene::init()
     x: Amplitude, y: Refraction , z: width (length of shockwave)
     */
     auto center = Director::getInstance()->getVisibleSize();
-
-    shockwave = new EffectShockWave();
-    shockwave->init();
-    shockwave->setShockParam(Vec3(25.0, 1.5, 80.0));
-    shockwave->setMaxRadius(250);
-    shockwave->setSpeed(340);
-    this->addChildEffect(shockwave);
+    
+    //this->setContentSize(Size(center.width / 2, center.height / 2));    
 
     sprite = Sprite::create("test.jpg");
     sprite->setPosition(center.width / 2, center.height / 2);
+    sprite->setScaleX(center.width / sprite->getContentSize().width);
+    sprite->setScaleY(center.height / sprite->getContentSize().height);
     this->addChild(sprite);
+
+    this->setScale(0.5);
 
     auto listener = EventListenerTouchOneByOne::create();
     listener->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan, this);
@@ -74,8 +73,16 @@ void MainScene::update(float dt)
 
 bool MainScene::onTouchBegan(Touch *touch, Event *uevent)
 {
-    shockwave->setCenter(touch->getLocation());
-    shockwave->setRepeat(1);
+    EffectShockWave *wave = new EffectShockWave();
+    wave->init();
+    wave->setShockParam(Vec3(20.0, 1.2, 70.0));
+    wave->setMaxRadius(250);
+    wave->setSpeed(130);
+    wave->setCenter(touch->getLocation());
+    wave->setRepeat(-1);
+    this->addChildEffect(wave);
+    
+    CCLOG("size: %d", this->childrenEffect.size());
 
     return true;
 }

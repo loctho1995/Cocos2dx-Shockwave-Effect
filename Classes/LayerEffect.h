@@ -36,6 +36,8 @@ public:
 	virtual void setDefaultProgram();
 
 	virtual void setContentSize(const Size & size);
+
+	virtual void setScale(float scale);
 	
 	virtual void update(float dt);
 	

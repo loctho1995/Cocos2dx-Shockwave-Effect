@@ -34,8 +34,6 @@ public:
     ~MainScene();
     
 protected:
-
-    EffectShockWave *shockwave;
     Sprite *sprite;
 };
 
